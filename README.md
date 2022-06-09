@@ -3,7 +3,7 @@ Laravel Sail Package for Lumen
 
 Install package:
 
-`composer require asavenkov/sail-lumen`
+`composer require cagdascalis/sail-lumen`
 
 Add this line to bootstrap/app.php
 
