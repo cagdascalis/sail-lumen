@@ -27,6 +27,11 @@ class SailPublishCommand extends Command
      */
     public function handle()
     {
+    	if (!file_exists($this->laravel->basePath('docker-compose.yml'))) {
+    		$this->line('sail:install command should be run first!');
+    		return false;
+    	}
+    	
     	// Custom vendor:publish
     	if (file_exists($this->laravel->basePath('vendor/laravel/sail/runtimes/8.1'))) {
     		$dockerPath = $this->laravel->basePath('docker');
