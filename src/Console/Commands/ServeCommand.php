@@ -131,7 +131,7 @@ class ServeCommand extends Command
             (new PhpExecutableFinder)->find(false),
             '-S',
             $this->host().':'.$this->port(),
-            base_path('server.php'),
+            base_path('public/index.php'),
         ];
     }
 
