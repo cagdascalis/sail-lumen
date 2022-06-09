@@ -1,5 +1,5 @@
 # lumen-sail
-Laravel Sail Package for Lumen
+Laravel Sail Package for Lumen 9 with php8.1
 
 Install package:
 

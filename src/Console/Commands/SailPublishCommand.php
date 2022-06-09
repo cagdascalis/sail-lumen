@@ -27,18 +27,27 @@ class SailPublishCommand extends Command
      */
     public function handle()
     {
-        $this->call('vendor:publish', ['--tag' => 'sail']);
+    	// Custom vendor:publish
+    	if (file_exists($this->laravel->basePath('vendor/laravel/sail/runtimes/8.1'))) {
+    		$dockerPath = $this->laravel->basePath('docker');
+    		shell_exec("rm -rf $dockerPath/");
+    		
+    		mkdir($this->laravel->basePath('docker'), 0755);
+    		mkdir($this->laravel->basePath('docker/8.1'), 0755);
+    		
+    		$src = $this->laravel->basePath('vendor/laravel/sail/runtimes/8.1/*');
+    		$dest = $this->laravel->basePath('docker/8.1/');
+    		shell_exec("cp -r $src $dest");
+    	}
 
         file_put_contents(
             $this->laravel->basePath('docker-compose.yml'),
             str_replace(
                 [
-                    './vendor/laravel/sail/runtimes/8.0',
-                    './vendor/laravel/sail/runtimes/7.4',
+                    './vendor/laravel/sail/runtimes/8.1',
                 ],
                 [
-                    './docker/8.0',
-                    './docker/7.4',
+                    './docker/8.1',
                 ],
                 file_get_contents($this->laravel->basePath('docker-compose.yml'))
             )
